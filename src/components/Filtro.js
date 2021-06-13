@@ -2,27 +2,28 @@ import React from "react";
 import styled from "styled-components";
 
 const FiltroDiv = styled.div`
-  height: 30rem;
+  height: 20rem;
   width: 12rem;
+  border-radius: 10px;
   border: 1px solid black;
   position: relative;
-  top: 20px;
+  top: 55px;
+  box-shadow: 3px 3px gray;
 `;
-
 
 
 class Filtro extends React.Component {
   render() {
     return(
       <FiltroDiv>
-          <h3>Filtro</h3>
+          <h3>Filtrar</h3>
           <p>Valor mínimo:</p>
             <input 
               type="number"
               value={this.props.filtroMin}
               onChange={this.props.onChangeFiltroMin}
-              >
-            </input>
+            
+            />
           <p>Valor máximo:</p>
           <input type="number"
               value={this.props.filtroMax}
@@ -30,11 +31,12 @@ class Filtro extends React.Component {
               />
           <p>Busca por nome:</p>
           <label>
-          <input type="text" 
-          id="text" 
-          name="text"
+          <input 
+          type="text" 
+          value={this.props.filtroNome}
+          onChange={this.props.onChangeFiltroNome}
           placeholder="Buscar"
-          ></input>
+          />
           </label>
       </FiltroDiv>
     )
