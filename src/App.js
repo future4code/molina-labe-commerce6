@@ -147,6 +147,20 @@ class App extends React.Component {
     sort: 'Crescente',
   };
 
+  componentDidMount() {
+  
+    const carrinhoSalvo = localStorage.getItem('cart') 
+    const arrayCart = JSON.parse(carrinhoSalvo)
+    if(arrayCart) {
+      this.setState({cart: arrayCart})
+    }
+    
+  }
+  componentDidUpdate() {
+    localStorage.setItem('cart', JSON.stringify(this.state.cart))
+  }
+
+
   filtraProduto = ()  => {
      return this.state.produtos
      .filter((produto) => produto.valor <= (this.state.filtroMax || Infinity))
@@ -192,15 +206,7 @@ class App extends React.Component {
 
   render() {
     const listaFiltrada = this.filtraProduto()
-    const valorTotalCompra = () => {
-      let valorTotal = 0
-  
-      for(let produto of this.state.cart) {
-        valorTotal += produto.valor * produto.quantidade
-      }
-  
-      return valorTotal
-    }
+    
     return (
       <AppContainer>
         <Filtro
