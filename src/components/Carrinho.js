@@ -1,63 +1,98 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 
 const ContainerCarrinho = styled.div`
-  height: 50%;
-  border: 1px solid black;
+  
+  height: 30px;
+  border: none;
   justify-content: center;
-  width: 70%;
   position: relative;
   top: 20px;
  
-`;
 
-const Remove = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-  padding: 5px;
-  
-
-  button{
-    height: 20px;
-    align-items: center;
-    justify-items: right;
+  button {
+      
+    cursor: pointer;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: white;
+    background-color: blueviolet;
+    position: relative;
+    top: 25px;
   }
 `;
 
-class Carrinho extends React.Component{
+const Texto = styled.h3`
+  text-align: start;
+  padding-left: 10px;
+  width: 600px;
+`;
 
+const Imagem = styled.img`
+  width: 130px;
+`;
 
-    render() {
-        return(
+const BotaoRemover =  styled.div`
+  
+  button {
+        
+    cursor: pointer;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: white;
+    background-color: blueviolet;
+      
+  }
+`
+function Carrinho(props) {
+  const [abrir, setAbrir] = useState(false);
 
-        <ContainerCarrinho>
-            <h3>Carrinho</h3>
-          <Remove>
-            <p>1</p>
-            <p> ItemA</p>
-            <button>Remover</button>
-          </Remove>
-          <Remove>
-            <p>2</p>
-            <p>ItemB</p>
-            <button>Remover</button>
-          </Remove>
-          <Remove>
-            <p>3</p>
-            <p>ItemC</p>
-            <button>Remover</button>
-          </Remove>
-          <p>Valor total:</p>
+  const navigateTo = () => {
+    setAbrir(!abrir);
+  };
 
-        </ContainerCarrinho>
+  const valorTotalCompra = () => {
+    let valorTotal = 0
 
-        )
+    for(let produto of props.cart) {
+      valorTotal += produto.valor * produto.quantidade
     }
 
+    return valorTotal
+  }
+  const renderCart = () => (
+    <>
+    
+      <h3>Carrinho</h3>
+      <div className="produtos">
+        {props.cart.map((produto) => (
+          <div className="produto" key={produto.id}>
+            <Imagem src={produto.imagem} alt={produto.nome} />
+            <p>{produto.nome}</p>
+            <p>R${produto.valor},00</p>
+            <BotaoRemover>
+            <button onClick={() => props.removeFromCart(produto)}>
+              Remover do Carrinho
+            </button>
+            </BotaoRemover>
+          </div>
+        ))}
+        <p>Valor total: R${valorTotalCompra()},00</p>
+      </div>
+    </>
+  );
+
+  return (
+    <div className="Carrinho">
+      <ContainerCarrinho>
+        <button onClick={() => navigateTo()}>
+          Ir para o Carrinho({props.cart.length})
+        </button>
+      </ContainerCarrinho>
+      {abrir === true && renderCart()}
+    </div>
+  );
 }
-export default Carrinho 
+
+export default Carrinho;

@@ -1,81 +1,4 @@
-import React from "react";
-import styled from "styled-components";
-
-
-const CardsProdutos = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-  /* background-color: pink; */
-  position: relative;
-  text-align:center;
-  top: 70px;
- 
-
-    button {
-      cursor: pointer;
-      margin-bottom: 10px
-    }
- 
-    img {
-      width: 130px;
-    }  
-`;
-
-const ContainerProdutos = styled.div`
-  
-  height: 80rem;
-  width: 120%;
-  flex-direction: row;
-  /* border: 1px solid black; */
-  justify-content: center;
-  text-align: right;
-  position: relative;
-  top: 20px;
-     
-`;
-
-const Contagem = styled.div`
-    display: flex;
-    align-items: left;
-    position: relative;
-    top: 60px;
-
-`
-
-const BorderImg = styled.div`
-  border: 1px solid black;
-  box-shadow: 5px 5px gray;
-  border-radius: 10px;
-`
-
-class Produtos extends React.Component {
-    state={
-      ordenacao: ""
-    }
-
-    onChangeOrdenacao = (event) => {
-      this.setState({ ordenacao: event.target.value});
-    }
-  
-    render() {
-      return (
-
-        <ContainerProdutos>
-          <Contagem>
-            <p>Quantidade de Produtos</p>
-          </Contagem>
-          <label>
-              <p>Ordenação</p>
-              <select 
-              value={this.state.ordenacao}
-              onChange={this.onChangeOrdenacao}>
-                <option value ={"Crescente"}>Crescente</option>
-                <option value={"Decresente"}>Decrescente</option>
-              </select>
-            </label>
-            <CardsProdutos>
-              <BorderImg>
+/* <BorderImg>
                 <img
                   src="https://urnashirts.com/images/uploads/280504/space-pug-galaxy-funny-pug-t-shirt_Men_Black.jpg"
                   alt=""
@@ -155,15 +78,4 @@ class Produtos extends React.Component {
                 <p>Item I</p>
                 <p>R$ 180,00</p>
                 <button>Adicionar ao Carrinho</button>
-              </BorderImg>
-              
-            </CardsProdutos>
-
-          </ContainerProdutos>
-        )
-
-    }
-
-}
-
-export default Produtos
+              </BorderImg> */
